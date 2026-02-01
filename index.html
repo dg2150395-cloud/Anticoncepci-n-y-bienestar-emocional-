@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Anticoncepción y Bienestar Emocional</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+
+:root {
+    --principal: #a88cd9;
+    --secundario: #f4f0fb;
+    --acento: #cfe7f3;
+    --texto: #2f2f2f;
+    --blanco: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--secundario);
+    color: var(--texto);
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(rgba(168,140,217,0.8), rgba(168,140,217,0.8)),
+    url("https://i.pinimg.com/736x/e7/a3/65/e7a365692ba38e50627a27be24c2d929.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: auto;
+    font-size: 18px;
+}
+
+/* NAV */
+nav {
+    display: flex;
+    justify-content: center;
+    background: var(--blanco);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav button {
+    border: none;
+    background: none;
+    padding: 15px 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+nav button.active {
+    background: var(--acento);
+    font-weight: 600;
+}
+
+section {
+    display: none;
+    padding: 0px;
+    width: 100%;
+    margin: 0;
+}
+
+/* Puedes añadir este media query para que en móviles el padding lateral sea menor */
+@media (max-width: 768px) {
+    section {
+        padding: 20px;
+    }
+}
+
+
+section.active {
+    display: block;
+}
+
+h2 {
+    color: #6a4fa3;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #db37db;
+    margin-bottom: 15px;
+}
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: var(--secundario);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card div {
+    padding: 20px;
+}
+
+/* CALCULATOR */
+.calculator input, .calculator button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.calculator button {
+    background: var(--principal);
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+.resultado {
+    background: var(--acento);
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 14px;
+    color: #666;
+}
+
+.metodos-hero {
+  display: flex;
+  background: #fdeff4;
+  border-radius: 25px;
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+.metodos-texto {
+  flex: 1;
+  padding: 70px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metodos-texto .tag {
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.metodos-texto h3 {
+  font-size: 40px;
+  font-weight: 300;
+  color: #e78ca2;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.metodos-texto p {
+  max-width: 420px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.metodos-imagen {
+  flex: 1;
+}
+
+.metodos-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 50% 100%;
+  border-bottom-left-radius: 50% 100%;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .metodos-hero {
+    flex-direction: column;
+  }
+
+  .metodos-imagen img {
+    border-radius: 0;
+    height: 300px;
+  }
+
+  .metodos-texto {
+    padding: 40px;
+  }
+
+  .grid {
+  grid-template-columns: 1fr;
+  }
+}
+
+.contenedor-seccion {
+    max-width: 2000px;    
+    margin: 0 auto;       
+    padding: 0 40px;      
+    width: 100%;          
+    box-sizing: border-box; 
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Anticoncepción y Bienestar Emocional</h1>
+    <p>
+        La Guía para Elegir tu Mejor Opción
+    </p>
+</div>
+
+<nav>
+    <button class="active" onclick="mostrarSeccion('inicio')">Inicio</button>
+    <button onclick="mostrarSeccion('metodos-anticonceptivos')">Métodos Anticonceptivos</button>
+    <button onclick="mostrarSeccion('eficacia')">Eficacia</button>
+    <button onclick="mostrarSeccion('emocional')">Bienestar Emocional</button>
+    <button onclick="mostrarSeccion('fertilidad')">Preservación de la Fertilidad</button>
+    <button onclick="mostrarSeccion('ciclo')">Calculadora del Ciclo</button>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio" class="active">
+    <div class="contenedor-seccion">
+    <h2>Explora, Reflexiona y Cuida tu Salud</h2>
+    <p style="text-align: justify;">
+        Bienvenidos 🌸, este espacio está creado para acompañarte en el aprendizaje sobre 
+        tu cuerpo, tus emociones y tus decisiones. Aquí encontrarás información científica, 
+        clara y sencilla, junto con herramientas y consejos para elegir un método anticonceptivo 
+        responsable, con respeto y amor propio.
+    </p>
+    <p style="text-align: justify;">
+        Si alguna vez tienes dudas o sientes inseguridad sobre tu cuerpo o tus decisiones, es válido recibir orientación y apoyo, sin sentir vergüenza. A veces no es fácil hablar con la familia o con la pareja, pero es importante buscar un momento adecuado, expresarse con claridad y pedir información cuando algo no se entiende. Si sientes que no puedes hablarlo con alguien cercano, siempre puedes acudir a un profesional de salud o a un centro de atención, donde recibirás orientación sin juicio y con respeto. La información es un derecho, y buscar ayuda cuando se necesita es una muestra de cuidado y responsabilidad contigo mismo.
+    </p>
+    <p style="text-align: justify;">
+        Además, es importante que conozcas tus derechos sexuales y reproductivos, porque te permiten tomar decisiones sobre tu cuerpo, tu vida y tu futuro. Estos derechos incluyen el acceso a información, a servicios de salud, a decidir si quieres o no tener hijos, y a vivir una vida libre de violencia y discriminación. Cuando una persona conoce sus derechos, puede exigirlos, protegerse y actuar con mayor seguridad, y eso contribuye a una vida más plena y libre. Por eso, esta plataforma también busca fortalecer el conocimiento de esos derechos, para que cada persona se sienta capaz de decidir con autonomía y sin presiones externas.
+    </p>
+    <p style="text-align: justify;">
+        La sexualidad no solo se vive en el presente, también se construye pensando en el futuro, por eso es importante planificar y tomar decisiones con perspectiva. Elegir un método anticonceptivo, cuidarse emocionalmente, y mantener relaciones basadas en el respeto, son acciones que pueden influir en el bienestar a largo plazo. Cuando se toman decisiones informadas, se reduce el riesgo de situaciones no deseadas, se fortalece la autoestima y se mejora la calidad de vida. Por eso, este espacio te invita a informarte, a reflexionar y a actuar con responsabilidad, porque tu salud y tu futuro son importantes.
+    </p>
+    <h2>Enfoque Integral de la Anticoncepción</h2>
+    <p style="text-align: justify;">
+        La anticoncepción es un tema fundamental para la salud y el bienestar de las personas, ya que permite tomar decisiones informadas y responsables sobre la vida sexual y reproductiva. El enfoque integral de la anticoncepción va más allá del uso de métodos para prevenir embarazos no planificados; considera aspectos físicos, emocionales, sociales y educativos que influyen en cada persona. Este enfoque promueve el acceso a información confiable, el respeto a los derechos sexuales y reproductivos, la igualdad de género y la orientación adecuada según la edad, las necesidades y el contexto de cada individuo. De esta manera, se busca fomentar una sexualidad saludable, segura y consciente.
+    </p>
+    <p style="text-align: justify;">
+        Esta plataforma busca brindar información clara, basada en evidencia científica,
+        pero presentada desde una mirada empática, respetuosa y centrada en la persona.
+    </p>
+    <h2>¿Qué tipo de métodos anticonceptivos existen?</h2>
+    <p style="text-align: justify;">
+        Existen varios tipos de anticonceptivos: mecánicos o de barrera, farmacológicos, quirúrgicos y naturales.
+    </p>
+    <p style="text-align: justify;">
+        Los métodos anticonceptivos naturales son utilizados por muchas mujeres que desean evitar los posibles efectos secundarios de los artificiales o que, dependiendo de la economía o el acceso a estos, no pueden optar por otros métodos. La mejor manera de usar los métodos de observación de la fertilidad es combinar los métodos de la temperatura, del moco cervical, y del calendario, aunque su eficacia es muy variable. Dentro de los otros tipos de anticonceptivos, encontramos:
+    </p>
+    <img src="bienestaremocional.jpg" alt="Imagen de salud" class="img-inicio">
+    <h2>Dimensiones de la sexualidad</h2>
+    <p style="text-align: justify;">
+        Para comprender la sexualidad humana, se consideran cuatro áreas que se influyen entre sí:
+     </p>
+    <h2>1. Aspecto biológico</h2>
+    <p style="text-align: justify;">
+        Se refiere a lo físico del cuerpo, como los órganos reproductores, los cromosomas (XX o XY), y procesos como la fertilidad, el embarazo y el nacimiento. También incluye los cambios naturales del cuerpo durante la pubertad, como el crecimiento, la aparición de vello, cambios en la voz, y el inicio del ciclo menstrual. Además, abarca la salud reproductiva, que implica conocer el funcionamiento del ciclo menstrual, la ovulación, y la importancia de los controles médicos periódicos para prevenir o detectar problemas a tiempo. Comprender el aspecto biológico ayuda a identificar señales de alerta en el cuerpo y a cuidar la salud integral.
+    </p>
+    <h2>2. Aspecto psicológico</h2>
+    <p style="text-align: justify;">
+        Incluye cómo una persona percibe su sexualidad, su identidad, orientación, emociones, deseos y experiencias íntimas. También se relaciona con la autoestima, la autoconfianza, y la forma en que se manejan las emociones en situaciones de pareja o afectivas. El aspecto psicológico influye en cómo se toman decisiones, en la forma de expresar el afecto, y en cómo se vive el deseo sexual. Además, incluye la capacidad de reconocer sentimientos como el amor, la atracción, el miedo o la presión social, y de manejar estos sentimientos de forma saludable.
+    </p>
+    <h2>3. Aspecto social</h2>
+    <p style="text-align: justify;">
+        Se centra en cómo el entorno afecta la sexualidad, incluyendo la familia, los amigos, la educación, las creencias y las reglas culturales. También incluye la influencia de los medios de comunicación, las redes sociales, la publicidad y los estereotipos de género, que muchas veces crean expectativas sobre el cuerpo, la apariencia y las relaciones. El aspecto social también abarca la importancia del apoyo familiar y social, y cómo la sociedad puede influir en las decisiones sobre la sexualidad, ya sea de forma positiva o negativa. Por eso es importante desarrollar un pensamiento crítico y elegir lo que sea mejor para cada persona, sin dejarse guiar por presiones externas.
+    </p>
+    <h2>4. Aspecto ético</h2>
+    <p style="text-align: justify;">
+        Se relaciona con la responsabilidad y la toma de decisiones conscientes, basadas en valores, respeto hacia los demás y normas morales. Incluye el respeto al consentimiento, la igualdad, la no violencia, y la responsabilidad en las relaciones afectivas y sexuales. También implica reconocer los límites propios y los de los demás, y actuar con respeto, sin presionar ni manipular a otras personas. El aspecto ético también considera la importancia de cuidar la salud propia y la de la pareja, respetando decisiones diferentes a las propias y promoviendo relaciones basadas en la confianza, la honestidad y el respeto mutuo.
+    </p>
+    <a class="boton-cta" href="javascript:void(0)" onclick="mostrarSeccion('metodos-anticonceptivos', event)">
+  Explora los métodos anticonceptivos
+    </a>
+
+    <p>
+      Para más información confiable, puedes visitar el siguiente
+      <a href="https://www.authenticintimacy.com/integridad-sexual-el-corazon-de-discipular-sexualmente-a-tus-hijos/" target="_blank">Recurso Educativo</a>
+    </p>
+    </div>
+</section>
+
+<!-- MÉTODOS ANTICONCEPTIVOS -->
+<section id="metodos-anticonceptivos">
+    <div class="contenedor-seccion">
+
+  <!-- HERO CURVO -->
+  <div class="metodos-hero">
+    <div class="metodos-texto">
+      <span class="tag">MÉTODOS ANTICONCEPTIVOS</span>
+      <h3>
+        Cada etapa es única.<br>
+        Cada mujer, también.
+      </h3>
+      <p>
+        Elegir un método anticonceptivo es una decisión personal que debe
+        adaptarse a tu cuerpo, tu salud y tu bienestar emocional.
+      </p>
+    </div>
+
+    <div class="metodos-imagen">
+      <img src="https://i.pinimg.com/736x/99/46/3e/99463ee2fb6566922695ab9fa573075b.jpg" alt="Mujer saludable">
+    </div>
+  </div>
+
+  <!-- TARJETAS -->
+  <h2>Clasificación de los Métodos Anticonceptivos</h2>
+        <p style="text-align: justify;">
+        Los métodos anticonceptivos se clasifican según su mecanismo de acción y duración, permitiendo a cada persona elegir la opción que mejor se adapte a sus necesidades, estado de salud y proyecto de vida.
+        </p>
+    <div class="grid">
+      <div class="card">
+        <img style="width: 70%; height: auto; object-position: center; object-fit: contain;" src="C:\Users\USUARIO\Downloads\s_h9991285_001.jpg">
+        <div>
+        <h3>Hormonales</h3>
+        <p style="text-align: justify;">
+        Son aquellos que utilizan hormonas para prevenir el embarazo, actuando principalmente sobre la ovulación y el entorno uterino.
+        </p>
+        <h4>Incluyen:</h4>
+        <ul>
+          <li>Píldora anticonceptiva</li>
+          <li>Implante subdérmico</li>
+          <li>Parche anticonceptivo</li>
+          <li>Anillo vaginal</li>
+          <li>Inyecciones hormonales</li>
+          <li>DIU hormonal</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <img style="width: 72%; height: auto; object-position: center; object-fit: contain;" src="C:\Users\USUARIO\Downloads\metodo-anticonceptivo.jpg">
+      <div>
+        <h3>No hormonales</h3>
+        <p style="text-align: justify;">
+        No contienen hormonas y no alteran el sistema endocrino, su acción es mecánica o química.
+        </p>
+        <h4>Incluyen:</h4>
+        <ul>
+          <li>DIU de cobre</li>
+          <li>Condón masculino y femenino</li>
+          <li>Diafragma</li>
+          <li>Esponja anticonceptiva</li>
+          <li>Espermicidas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <img style="width: 43%; height: auto; object-position: center; object-fit: contain;" src="C:\Users\USUARIO\Downloads\17_imatge_mucotermic.jpg_.jpg">
+      <div>
+        <h3>Naturales</h3>
+        <p style="text-align: justify;">
+        Se basan en la observación del ciclo reproductivo y en decisiones conscientes sobre la actividad sexual.
+        </p>
+        <h4>Incluyen:</h4>
+        <ul>
+          <li>Observación de la fertilidad</li>
+          <li>Coito interrumpido</li>
+          <li>Abstinencia periódica</li>
+          <li>Método de la lactancia materna (LAM)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <img style="width: 70%; height: auto; object-position: center; object-fit: contain;" src="https://www.balneariais.es/adminbal/assets/images/noticias/blog-cmm-41.png">
+      <div>
+        <h3>Permanentes</h3>
+        <p style="text-align: justify;">
+        Son métodos irreversibles, indicados para personas que han decidido no tener más hijos.
+        </p>
+        <h4>Incluyen:</h4>
+        <ul>
+          <li>Ligadura de trompas</li>
+          <li>Vasectomía</li>
+        </ul>
+      </div>
+    </div>
+    </div> <div style="margin-top: 40px; width: 100%;">
+    <p style="text-align: justify;">
+      Es importante tener en cuenta que no todos los métodos anticonceptivos son adecuados para todas las personas, ya que cada cuerpo, etapa de vida y condición de salud es diferente. Por ello, se recomienda recibir orientación de un profesional de la salud antes de elegir un método. Además, es fundamental recordar que el condón es el único método que, además de prevenir embarazos no planificados, contribuye a la prevención de infecciones de transmisión sexual, promoviendo una sexualidad más segura y responsable.
+    </p>
+    </div>
+</section>
+
+<!-- EFICACIA -->
+ <section id="eficacia">
+    <div class="contenedor-seccion">
+    <div style="max-width: 2000px; margin: auto;">
+        <h2 style="margin-top: 2;">Eficacia Anticonceptiva</h2>
+        
+        <p style="text-align: justify;">
+            La tasa de falla varía según el método y su uso. Es fundamental comprender que ningún método es 100% infalible, pero la elección de uno con alta tasa de éxito reduce drásticamente las probabilidades de un embarazo no planificado. El siguiente gráfico muestra la eficacia en <b>uso típico</b>, que es el porcentaje real de efectividad considerando los errores humanos comunes en el día a día.
+        </p>
+
+        <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 25px 0;">
+            <h3 style="font-size: 18px; text-align: center; color: #6a4fa3; margin-bottom: 20px;">Eficacia en Uso Típico (%)</h3>
+            <div style="position: relative; height:350px; width:100%">
+                <canvas id="graficoEficacia"></canvas>
+            </div>
+            <p style="font-size: 13px; color: #666; text-align: center; margin-top: 15px; font-style: italic;">
+                Datos: Implante (99%), DIU (99%), Pastillas (93%), Preservativo (87%).
+            </p>
+        </div>
+        </div>
+
+        <h3>¿Qué factores influyen en la eficacia?</h3>
+        <p style="text-align: justify;">
+            Existen dos formas de medir qué tan bien funciona un anticonceptivo:
+        </p>
+        
+        <ul style="text-align: justify; line-height: 1.6;">
+            <li><b>Uso Perfecto:</b> Representa la eficacia del método cuando se utiliza de manera impecable, sin ningún error, siguiendo todas las instrucciones al pie de la letra.</li>
+            <li><b>Uso Típico:</b> Es el reflejo de la realidad. Incluye situaciones como olvidar una pastilla, que el condón se deslice o que el parche se despegue.</li>
+        </ul>
+
+        <h3 style="margin-top: 30px;">Análisis por Categoría</h3>
+        <p style="text-align: justify;">
+            Para entender mejor por qué unos métodos fallan más que otros, los podemos agrupar según la intervención requerida:
+        </p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+            <div style="background: #f0f7ff; padding: 20px; border-radius: 12px; border-left: 5px solid #a88cd9;">
+                <h4 style="margin: 0 0 10px 0;">Métodos de Larga Duración (LARC)</h4>
+                <p style="font-size: 14px; margin: 0;">Como el implante y el DIU. Tienen un <b>99% de éxito</b> porque no dependen de que la persona se acuerde de tomarlos o usarlos cada vez. Son de "colocar y olvidar".</p>
+            </div>
+            <div style="background: #fff0f5; padding: 20px; border-radius: 12px; border-left: 5px solid #e78ca2;">
+                <h4 style="margin: 0 0 10px 0;">Métodos de Barrera</h4>
+                <p style="font-size: 14px; margin: 0;">El preservativo tiene un <b>87% de eficacia típica</b>. Aunque es menor a otros, es el único que protege contra Infecciones de Transmisión Sexual (ITS).</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">¿Por qué disminuye la eficacia en algunos métodos?</h3>
+        <p style="text-align: justify;">
+            La diferencia entre el uso perfecto y el uso típico suele deberse a factores externos que muchas veces ignoramos. Conocerlos ayuda a mantener la protección lo más alta posible:
+        </p>
+
+        <div style="background: #ffffff; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin-top: 15px;">
+            <ul style="text-align: justify; line-height: 1.8;">
+                <li><b>Interacciones medicamentosas:</b> Algunos antibióticos, antifúngicos o incluso remedios naturales (como la hierba de San Juan) pueden reducir los niveles de hormonas en la sangre, bajando la eficacia de la píldora, el parche o el anillo.</li>
+                <li><b>Errores de almacenamiento:</b> Los preservativos y las pruebas de fertilidad deben guardarse en lugares frescos y secos. El calor extremo (como dejar preservativos en el coche) daña los materiales y facilita rupturas microscópicas.</li>
+                <li><b>Problemas gastrointestinales:</b> Si tienes vómitos o diarrea intensa pocas horas después de tomar la pastilla anticonceptiva, es posible que el cuerpo no haya absorbido el medicamento adecuadamente, dejándote desprotegida.</li>
+            </ul>
+        </div>
+
+        <h3 style="margin-top: 40px;">Comparativa de Duración y Reversibilidad</h3>
+        <p style="text-align: justify;">
+            Además de la eficacia, es importante considerar cuánto tiempo deseas estar protegida y qué tan rápido quieres que tu fertilidad regrese a la normalidad:
+        </p>
+
+        <div style="overflow-x: auto; margin-top: 15px;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <thead>
+                    <tr style="background-color: #a88cd9; color: white; text-align: left;">
+                        <th style="padding: 15px;">Método</th>
+                        <th style="padding: 15px;">Duración</th>
+                        <th style="padding: 15px;">Retorno a la Fertilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px;">Implante Subdérmico</td>
+                        <td style="padding: 15px;">3 a 5 años</td>
+                        <td style="padding: 15px;">Inmediato al retirar</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee; background-color: #fafafa;">
+                        <td style="padding: 15px;">DIU de Cobre</td>
+                        <td style="padding: 15px;">Hasta 10 años</td>
+                        <td style="padding: 15px;">Inmediato al retirar</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px;">Inyectable Trimestral</td>
+                        <td style="padding: 15px;">3 meses</td>
+                        <td style="padding: 15px;">Puede tardar de 6 a 10 meses</td>
+                    </tr>
+                    <tr style="background-color: #fafafa;">
+                        <td style="padding: 15px;">Píldoras / Parche</td>
+                        <td style="padding: 15px;">Uso diario/semanal</td>
+                        <td style="padding: 15px;">Inmediato al suspender</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #eef9ff; border-radius: 15px; border: 1px dashed #a8cde0;">
+            <h4 style="color: #2c5d7d; margin-top: 0;">🛡️ Doble Protección</h4>
+            <p style="font-size: 0.9rem; text-align: justify; color: #444;">
+                Aunque métodos como el implante o la inyección tienen una eficacia altísima para prevenir embarazos, <strong>no protegen contra Infecciones de Transmisión Sexual (ITS)</strong>. Para una salud integral, se recomienda el uso del preservativo en conjunto con tu método hormonal (Doble Protección).
+            </p>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #eef9f2; border-radius: 12px; text-align: justify;">
+            <h4 style="margin-top: 0; color: #2d7a4d;">Consejo para una decisión informada</h4>
+            <p style="margin-bottom: 0;">
+                Recuerda que la "mejor" opción no siempre es la que tiene el número más alto en la tabla, sino la que mejor se adapta a tu estilo de vida. Si eres una persona olvidadiza, un método LARC (como el DIU o implante) será mucho más eficaz para ti que una pastilla diaria, aunque en papel ambas tengan eficacias muy altas en uso perfecto.
+            </p>
+        </div>
+
+        <div style="background: #fdf6e3; padding: 20px; border-radius: 10px; margin-top: 30px; border: 1px dashed #d3ad47;">
+            <p style="margin: 0; font-size: 15px; color: #856404; text-align: justify;">
+                <b>Nota Importante:</b> La eficacia puede aumentar si se combinan métodos. Por ejemplo, el uso simultáneo de pastillas anticonceptivas y preservativo ofrece una doble protección: contra el embarazo y contra enfermedades.
+            </p>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- EMOCIONAL -->
+ <section id="emocional">
+    <div class="contenedor-seccion">
+    <div style="max-width: 2000px; margin: auto;">
+        <h2 style="margin-top: 2;">Anticoncepción y Bienestar Emocional</h2>
+        
+        <p style="text-align: justify;">
+            Elegir un método anticonceptivo no es solo una decisión física, sino también emocional. Las hormonas y la tranquilidad de una protección segura juegan un papel crucial en cómo nos sentimos día a día. Es vital entender que cada cuerpo reacciona de manera única.
+        </p>
+
+        <div class="grid" style="margin-top: 30px;">
+            <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <h4 style="color: #a88cd9;">El impacto de las hormonas</h4>
+                <p style="font-size: 14px; text-align: justify;">Algunos métodos hormonales pueden influir en los neurotransmisores que regulan el estado de ánimo. Algunas personas reportan mayor estabilidad, mientras que otras pueden sentir irritabilidad o cambios de humor. Escuchar a tu cuerpo es la clave.</p>
+            </div>
+            <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <h4 style="color: #a88cd9;">Tranquilidad y Libertad</h4>
+                <p style="font-size: 14px; text-align: justify;">Usar un método altamente eficaz reduce la "ansiedad por embarazo", lo que permite disfrutar de una vida sexual más plena, libre de miedos constantes, mejorando la conexión con la pareja y la autoestima.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">¿Cómo identificar si tu método afecta tus emociones?</h3>
+        <p style="text-align: justify;">
+            Es normal pasar por un proceso de adaptación (generalmente de 3 meses). Sin embargo, presta atención a las siguientes señales:
+        </p>
+
+        <div style="background: #f8f4ff; padding: 25px; border-radius: 15px; border-left: 5px solid #a88cd9; margin: 20px 0;">
+            <ul style="line-height: 1.8; margin: 0;">
+                <li>Sentimientos constantes de tristeza o apatía sin causa aparente.</li>
+                <li>Cambios drásticos en el deseo sexual (libido).</li>
+                <li>Aumento de la ansiedad o ataques de pánico después de iniciar el método.</li>
+                <li>Alteraciones en los patrones de sueño.</li>
+            </ul>
+        </div>
+
+        <h3 style="margin-top: 40px;">Consejos para el Autocuidado</h3>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+                <b>1. Lleva un diario:</b> Registra tus emociones durante los primeros meses. Esto te ayudará a ver si hay un patrón real relacionado con el ciclo o el método.
+            </div>
+            <div style="flex: 1; min-width: 250px; background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+                <b>2. Comunicación abierta:</b> Habla con tu pareja y tu médico sobre cómo te sientes. El bienestar emocional es tan importante como la eficacia anticonceptiva.
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Influencia Bioquímica</h3>
+        <p style="text-align: justify;">
+            Las hormonas sexuales influyen en neurotransmisores como la <b>serotonina y dopamina</b>. Estas sustancias químicas son las encargadas de transmitir señales en el cerebro que afectan directamente tu felicidad, motivación y niveles de estrés. 
+        </p>
+
+        <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin: 25px 0; border-right: 5px solid var(--principal);">
+            <p style="margin: 0; font-style: italic; color: #555; text-align: center;">
+                "El acompañamiento profesional y la escucha del propio cuerpo son claves para una experiencia anticonceptiva positiva."
+            </p>
+        </div>
+
+        <p style="text-align: justify;">
+            Algunas personas experimentan cambios en el estado de ánimo, ansiedad o bienestar general al utilizar métodos hormonales. No se trata de "imaginaciones"; es una respuesta bioquímica real que varía según la carga hormonal de cada método y la sensibilidad de cada usuaria. Por ello, la elección informada es el primer paso hacia una salud integral.
+        </p>
+
+        <div style="max-width: 2000px; background: #f4f0fb; border-radius: 15px;">
+            <h3 style="color: #6a4fa3; margin-top: 0;">🧠 Autonomía y Consentimiento</h3>
+            <p style="font-size: 1.1rem; text-align: justify; color: #555; line-height: 1.8; margin-top: 15px;"></p>   
+                Elegir un método anticonceptivo es un acto de amor propio y responsabilidad. Nadie debe presionarte en tu elección. El bienestar emocional comienza cuando te sientes segura, informada y respetada en tus decisiones reproductivas.
+            </p>
+        </div>
+
+        <div style="background: #eef9f2; padding: 20px; border-radius: 12px; margin-top: 40px; border-left: 5px solid #2d7a4d;">
+            <h4 style="margin-top: 0; color: #2d7a4d;">Recuerda:</h4>
+            <p style="margin-bottom: 0; text-align: justify;">
+                No tienes que "aguantar" efectos secundarios emocionales. Si sientes que tu método actual está perjudicando tu calidad de vida, existen muchas alternativas (hormonales con dosis bajas o no hormonales) que pueden adaptarse mejor a tu bienestar mental.
+            </p>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- FERTILIDAD -->
+ <section id="fertilidad">
+    <div class="contenedor-seccion">
+    <div style="max-width: 2000px; margin: auto;">
+        <h2 style="margin-top: 2;">Preservación de la fertilidad</h2>
+        <p style="text-align: justify;">
+            La preservación de la fertilidad consiste en procedimientos médicos destinados a mantener la capacidad reproductiva de una persona para el futuro. Esto es especialmente importante cuando existen factores médicos o personales que podrían afectar la calidad o cantidad de las células reproductivas.
+        </p>
+
+        <div class="grid">
+            <div class="card" style="background: white; border: 1px solid #efeaff;">
+                <div style="padding: 25px;">
+                    <h3 style="color: #a88cd9;">Criopreservación de Óvulos</h3>
+                    <p style="font-size: 14px; text-align: justify;">Es el proceso de extracción y congelación de los óvulos de una mujer para ser utilizados en el futuro. Es una opción ideal para quienes desean posponer la maternidad por razones personales o médicas (como tratamientos oncológicos).</p>
+                </div>
+            </div>
+            <div class="card" style="background: white; border: 1px solid #efeaff;">
+                <div style="padding: 25px;">
+                    <h3 style="color: #a88cd9;">Criopreservación de Esperma</h3>
+                    <p style="font-size: 14px; text-align: justify;">Consiste en recolectar y congelar muestras de semen. Permite que hombres que se someterán a cirugías o tratamientos que afecten su fertilidad puedan asegurar su capacidad de ser padres biológicos más adelante.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px;">Reproducción Asistida</h3>
+        <p style="text-align: justify;">
+            Para quienes tienen dificultades para concebir de forma natural, existen técnicas avanzadas que ayudan a lograr el embarazo:
+        </p>
+        <ul style="line-height: 1.8; text-align: justify;">
+            <li><strong>Fecundación in Vitro (FIV):</strong> Unión del óvulo con el espermatozoide en un laboratorio.</li>
+            <li><strong>Inseminación Artificial:</strong> Introducción de espermatozoides directamente en el útero durante la ovulación.</li>
+            <li><strong>Ovodonación:</strong> Tratamiento donde se utilizan óvulos de una donante para aquellas mujeres que no pueden usar los propios.</li>
+        </ul>
+
+        <div style="margin-bottom: 25px;">
+        <h4 style="color: #db37db; margin-bottom: 10px; font-size: 1.1rem;">🩺 Diagnóstico de la Reserva Ovárica</h4>
+        <p style="font-size: 0.9rem; color: #555; text-align: justify; line-height: 1.5; margin: 0;">
+            Antes de decidir un tratamiento, es fundamental conocer el estado de la fertilidad. Esto se realiza mediante el análisis de la <b>Hormona Antimülleriana (AMH)</b> en sangre y una ecografía para el <b>Recuento de Folículos Antrales</b>, permitiendo estimar cuántos óvulos quedan disponibles.
+        </p>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+        <h4 style="color: #db37db; margin-bottom: 10px; font-size: 1.1rem;">❄️ Criopreservación de Embriones</h4>
+        <p style="font-size: 0.9rem; color: #555; text-align: justify; line-height: 1.5; margin: 0;">
+            A diferencia de congelar solo el óvulo, en este proceso se congelan óvulos ya fecundados. Es una opción muy utilizada por parejas que desean asegurar su descendencia biológica para el futuro, ofreciendo tasas de éxito muy altas tras la descongelación.
+        </p>
+        </div>
+
+        <div style="margin-bottom: 25px;">
+        <h4 style="color: #db37db; margin-bottom: 10px; font-size: 1.1rem;">🔬 Diagnóstico Genético (DGP)</h4>
+        <p style="font-size: 0.9rem; color: #555; text-align: justify; line-height: 1.5; margin: 0;">
+            Es una técnica complementaria a la FIV que permite analizar los embriones antes de transferirlos al útero. Su objetivo es detectar anomalías cromosómicas, asegurando que el embrión seleccionado sea saludable y aumentando las probabilidades de éxito del embarazo.
+        </p>
+        </div>
+        
+        <p style="text-align: justify; background: #fff5fb; padding: 15px; border-left: 4px solid #db37db; border-radius: 8px; font-size: 0.9rem;">
+        <strong>Nota Importante:</strong> La calidad y cantidad de la reserva ovárica disminuye naturalmente con el tiempo, especialmente a partir de los 35 años. La criopreservación es más efectiva cuando se realiza a edades tempranas, permitiendo "detener el reloj biológico" de las células reproductivas.
+        </p>
+    </div>
+    </div>
+</section>
+
+<section id="ciclo">
+    <div class="contenedor-seccion">
+    <style>
+        /* Contenedor alineado a la izquierda */
+        .cv-contenedor-ajuste {
+            display: flex;
+            justify-content: center; /* Alineado a la izquierda */
+            padding: 50px 0;
+            background: #fdfbff;
+        }
+
+        .cv-card {
+            width: 100%;
+            max-width: 2000px;
+            min-height: 600px;
+            background: #f2f2f2;
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 50px rgba(168, 140, 217, 0.15);
+            border: 1px solid #f1e9ff;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cv-h1 { font-size: 1.5rem; color: #b392ac; margin-bottom: 10px; font-weight: 600; }
+        
+        /* Texto Justificado */
+        .cv-lead { 
+            font-size: 0.85rem; 
+            color: #777; 
+            margin-bottom: 25px; 
+            line-height: 1.4; 
+            text-align: justify; 
+        }
+
+        .cv-form { display: flex; flex-direction: column; gap: 15px; }
+        .cv-form label { font-size: 0.85rem; color: #555; margin-bottom: 5px; display: block; }
+
+        .cv-input, .cv-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid #efeaff;
+            background: #fdfbff;
+            font-family: inherit;
+        }
+
+        .cv-full { display: flex; gap: 10px; margin-top: 10px; }
+
+        .cv-btn-calc {
+            flex: 1; background: #d1b3e8; color: white; border: none; 
+            padding: 12px; border-radius: 20px; cursor: pointer; font-weight: 600;
+        }
+
+        .cv-btn-clear {
+            flex: 1; background: #ffb7b7; color: white; border: none; 
+            padding: 12px; border-radius: 20px; cursor: pointer; font-weight: 600;
+        }
+
+        .cv-results { margin-top: 20px; }
+        
+        .cv-result-box {
+            padding: 15px; background: #fff9ff; 
+            border-radius: 15px; border: 1px dashed #d1b3e8; margin-bottom: 10px;
+        }
+        
+        .cv-month-item {
+            background: #fff; padding: 10px; border-radius: 10px; 
+            font-size: 0.85rem; border-left: 4px solid #d1b3e8; margin-bottom: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .cv-footer-internal {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #999;
+            text-align: justify;
+        }
+/* Estilo para las tarjetas de resultados (como en tu imagen) */
+.cv-resultado-card {
+    background: #ffffff;
+    border: 1px solid #f1e9ff;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(168, 140, 217, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cv-resultado-titulo {
+    font-size: 0.8rem;
+    color: #b392ac;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cv-resultado-fecha {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2f2f2f;
+}
+
+/* 🌸 ESTO HARÁ QUE SALGAN LOS CUADROS COMO EN TU FOTO 🌸 */
+        .cv-resultado-card {
+            background: #fdefff;
+            border: 1px solid #f1e9ff;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(168, 140, 217, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-align: left;
+        }
+
+        .cv-resultado-titulo {
+            font-size: 0.8rem;
+            color: #b392ac;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cv-resultado-fecha {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2f2f2f;
+        }
+
+        .cv-calendario-box {
+            background: #ffffff;
+            border: 1px dashed #d1b3e8;
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* 🔥 FORZAR COLOR ROSADO EN LOS CUADROS */
+        #monthsContainer > div {
+             background: #fdefff !important;
+        }
+
+
+    </style>
+
+    <div class="cv-contenedor-ajuste">
+    <div class="cv-card">
+      <h1 class="cv-h1">🌸 CicloVital — Seguimiento 🌸</h1>
+      <p class="cv-lead">
+        Registra tu último periodo y duración del ciclo para conocer tus días fértiles,
+        ovulación y próximos periodos.
+      </p>
+
+      <form id="cycleForm" class="cv-form">
+        <div>
+          <label for="lastPeriod">Fecha de inicio de la última regla</label>
+          <input id="lastPeriod" class="cv-input" type="date" required />
+        </div>
+
+        <div>
+          <label for="cycleLength">Duración típica del ciclo (días)</label>
+          <input id="cycleLength" class="cv-input" type="number" min="21" max="45" value="28" required />
+        </div>
+
+        <div>
+          <label for="periodLength">Duración del sangrado (días)</label>
+          <input id="periodLength" class="cv-input" type="number" min="2" max="10" value="5" required />
+        </div>
+
+        <div>
+          <label for="monthsToShow">Meses a calcular</label>
+          <select id="monthsToShow" class="cv-select">
+            <option value="3">3 meses</option>
+            <option value="6" selected>6 meses</option>
+            <option value="12">12 meses</option>
+          </select>
+        </div>
+
+        <div class="cv-full">
+          <button type="submit" class="cv-btn-calc">Calcular</button>
+          <button type="button" id="clearBtn" class="cv-btn-clear">Borrar datos</button>
+        </div>
+      </form>
+
+      <div id="resultsMain" class="cv-results"></div>
+
+      <div id="monthsContainer" class="cv-results"></div>
+
+      <div class="cv-footer-internal">
+        🌷 <em>CicloVital</em> es un proyecto educativo diseñado para promover la salud femenina. Consulta siempre con un profesional médico para asesoramiento personalizado.
+      </div>
+    </div>
+  </div>
+
+<div style="max-width: 2000px; margin: 20px auto; background: white; padding: 20px; border-radius: 20px; border: 1px solid #f1e9ff; font-size: 0.85rem;">
+        <h3 style="color: #b392ac; margin-top: 0;">🍎 Guía de Bienestar</h3>
+        <div style="margin-bottom: 10px;">
+            <span style="color: #ffb7b7;">●</span> <b>Fase Roja:</b> Descansa y cuida tu energía.
+        </div>
+        <div style="margin-bottom: 10px;">
+            <span style="color: #d1b3e8;">●</span> <b>Fase Brilla:</b> Mayor energía y creatividad.
+        </div>
+        <div>
+            <span style="color: #cfe7f3;">●</span> <b>Fase Calma:</b> Escucha tus emociones.
+        </div>
+    </div>
+    </div>
+
+    <div style="max-width: 1270px; margin: 30px auto; padding: 30px; background: #ffffff; border-radius: 25px; border: 1px solid #f1e9ff; box-shadow: 0 10px 30px rgba(168, 140, 217, 0.08);">
+    <h3 style="color: #6a4fa3; margin-bottom: 25px; font-size: 1.3rem; font-weight: 600; padding-left: 10px;">Preguntas Frecuentes</h3>
+    
+    <div style="margin-bottom: 15px;">
+        <details style="background: #fdfbff; padding: 18px; border-radius: 15px; cursor: pointer; border: 1px solid #efeaff; transition: all 0.3s ease;">
+            <summary style="font-weight: 600; color: #db37db; font-size: 0.95rem;">¿Es normal que mi ciclo varíe algunos días?</summary>
+            <p style="padding-top: 12px; font-size: 0.9rem; color: #555; text-align: justify; line-height: 1.5; margin: 0;">
+                Sí, es totalmente normal. El ciclo menstrual puede variar algunos días debido al estrés, cambios en la alimentación, el ejercicio, el sueño o las hormonas. Variaciones de hasta 7 días suelen considerarse normales. Cada cuerpo es diferente y estos cambios no siempre indican un problema, pero si son constantes o muy marcados, es recomendable consultar a un profesional de salud.
+            </p>
+        </details>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <details style="background: #fdfbff; padding: 18px; border-radius: 15px; cursor: pointer; border: 1px solid #efeaff;">
+            <summary style="font-weight: 600; color: #db37db; font-size: 0.95rem;">¿Cómo afecta el bienestar emocional al ciclo menstrual?</summary>
+            <p style="padding-top: 12px; font-size: 0.9rem; color: #555; text-align: justify; line-height: 1.5; margin: 0;">
+                El bienestar emocional influye directamente en el ciclo menstrual; el estrés elevado aumenta el cortisol, una hormona que puede alterar la ovulación y generar irregularidades. Las emociones intensas y sostenidas pueden reflejarse en cambios en la duración o regularidad del ciclo, por lo que el autocuidado emocional es fundamental.
+            </p>
+        </details>
+    </div>
+
+    <div style="margin-bottom: 0;">
+        <details style="background: #fdfbff; padding: 18px; border-radius: 15px; cursor: pointer; border: 1px solid #efeaff;">
+            <summary style="font-weight: 600; color: #db37db; font-size: 0.95rem;">¿Qué debo hacer si olvido mi método anticonceptivo?</summary>
+            <p style="padding-top: 12px; font-size: 0.9rem; color: #555; text-align: justify; line-height: 1.5; margin: 0;">
+                Si olvidas tu método anticonceptivo, revisa las instrucciones específicas del fabricante. En el caso de las pastillas, la recomendación general es tomarla en cuanto lo recuerdes. Cuando el retraso supera las 12 horas (o el tiempo indicado en el prospecto), la eficacia puede verse reducida, por lo que se aconseja usar preservativo como refuerzo durante los siguientes 7 días. Además, si los olvidos son frecuentes o tienes dudas, es importante consultar con un profesional de salud para recibir orientación adecuada.
+            </p>
+        </details>
+    </div>
+    </div>
+</section>
+   
+<script>
+        document.getElementById('cycleFormMain').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const fechaVal = document.getElementById('lastPeriodMain').value;
+            const ciclo = parseInt(document.getElementById('cycleLengthMain').value);
+            const meses = parseInt(document.getElementById('monthsToShowMain').value);
+
+            if(!fechaVal) return;
+
+            const inicio = new Date(fechaVal + 'T00:00:00');
+            const proximo = new Date(inicio);
+            proximo.setDate(inicio.getDate() + ciclo);
+
+            // Resultado del próximo periodo
+            const resDiv = document.getElementById('resultsMain');
+            resDiv.innerHTML = `
+                <div class="cv-result-box">
+                    <strong>Próximo periodo:</strong><br>
+                    ${proximo.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'})}
+                </div>
+                <p style="font-size:0.8rem; color:#aaa; margin-bottom:10px;">Calendario estimado:</p>
+            `;
+
+            // Generar la lista de meses (Calendario Estimado)
+            const contMeses = document.getElementById('monthsContainerMain');
+            contMeses.innerHTML = ''; 
+            let tempFecha = new Date(inicio);
+
+            for(let i=0; i < meses; i++) {
+                const item = document.createElement('div');
+                item.className = 'cv-month-item';
+                item.innerHTML = `
+                    <span style="text-transform: capitalize;">${tempFecha.toLocaleString('es-ES', {month:'long'})}</span>
+                    <strong>${tempFecha.toLocaleDateString('es-ES', {day:'2-digit', month:'2-digit'})}</strong>
+                `;
+                contMeses.appendChild(item);
+                tempFecha.setDate(tempFecha.getDate() + ciclo);
+            }
+        });
+
+        function limpiarCalc() {
+            document.getElementById('cycleFormMain').reset();
+            document.getElementById('resultsMain').innerHTML = '';
+            document.getElementById('monthsContainerMain').innerHTML = '';
+        }
+    </script>
+</section>
+
+<footer>
+    <p>Contenido educativo con base científica. No sustituye consulta médica.</p>
+</footer>
+
+<script>
+function mostrarSeccion(id) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+    document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+window.onload = function() {
+        const ctx = document.getElementById('graficoEficacia');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Implante', 'DIU', 'Pastillas', 'Preservativo'],
+                    datasets: [{
+                        label: 'Eficacia (%)',
+                        data: [99, 99, 93, 87],
+                        backgroundColor: ['#b8a0e6','#cfe7f3','#f7c6d9','#d6c1f5']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true, max: 100 }
+                    }
+                }
+            });
+        }
+    };
+</script>
+
+<script>
+  // Esta función es para que el menú funcione y muestre la sección
+  function mostrarSeccion(id) {
+    document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+    const target = document.getElementById(id);
+    if (target) target.classList.add("active");
+    
+    // Si tienes botones en el nav, esto les pone el color de activo
+    document.querySelectorAll("nav button").forEach(btn => btn.classList.remove("active"));
+    if (event && event.currentTarget) event.currentTarget.classList.add("active");
+  }
+
+  // Lógica de cálculo con TU DISEÑO
+  const form = document.getElementById('cycleForm');
+  
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const fechaVal = document.getElementById('lastPeriod').value;
+      const ciclo = parseInt(document.getElementById('cycleLength').value);
+      const sangrado = parseInt(document.getElementById('periodLength').value);
+      const meses = parseInt(document.getElementById('monthsToShow').value);
+
+      if(!fechaVal) return;
+
+      const inicio = new Date(fechaVal + 'T00:00:00');
+      
+      // 1. Cálculos de fechas
+      const proximo = new Date(inicio);
+      proximo.setDate(inicio.getDate() + ciclo);
+      
+      const ovu = new Date(inicio);
+      ovu.setDate(inicio.getDate() + (ciclo - 14));
+
+      const fertilInicio = new Date(ovu);
+      fertilInicio.setDate(ovu.getDate() - 3); // 3 días antes
+      const fertilFin = new Date(ovu);
+      fertilFin.setDate(ovu.getDate() + 2);    // 2 días después
+
+      // 2. Renderizar tarjetas de resultado (Diseño de cuadros blancos)
+      const resDiv = document.getElementById('resultsMain');
+      resDiv.innerHTML = `
+        <div class="cv-resultado-card" style="border-left: 5px solid #f7c6d9;">
+          <div class="cv-resultado-titulo">🌷 Próxima menstruación (estimada)</div>
+          <div class="cv-resultado-fecha">${proximo.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
+          </div>
+        </div>
+        <div class="cv-resultado-card" style="border-left: 5px solid #f7c6d9;">
+          <div class="cv-resultado-titulo">💮 Día estimado de ovulación</div>
+          <div class="cv-resultado-fecha">${ovu.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'})}</div>
+        </div>
+        <div class="cv-resultado-card" style="border-left: 5px solid #f7c6d9;">
+          <div class="cv-resultado-titulo">🌼 Ventana fértil</div>
+          <div class="cv-resultado-fecha">Del ${fertilInicio.getDate()} al ${fertilFin.getDate()} de ${fertilInicio.toLocaleString('es-ES', {month: 'long', year:'numeric'})}</div>
+        </div>
+      `;
+
+      // 3. GENERADOR DE TARJETAS (DISEÑO SEGÚN IMAGEN)
+      const contMeses = document.getElementById('monthsContainer');
+      contMeses.innerHTML = '<p style="text-align:center; font-size:1.1rem; color:#000; margin-bottom:15px;">Calendario Estimado</p>'; 
+
+      // Funciones internas para que el cálculo sea preciso
+      const sumarDias = (d, n) => {
+        let res = new Date(d);
+        res.setDate(res.getDate() + n);
+        return res;
+      };
+
+      const mostrarFecha = (d) => {
+        return d.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).replace('.', '');
+      };
+
+      let fechaCiclo = new Date(inicio);
+
+      for (let i = 0; i < meses; i++) {
+        // Cálculos según la lógica de tu captura
+        const inicioPeriodo = new Date(fechaCiclo);
+        const finPeriodo = sumarDias(inicioPeriodo, sangrado - 1);
+        const diaOvulacion = sumarDias(inicioPeriodo, ciclo - 14);
+        const fertInicio = sumarDias(diaOvulacion, -5);
+        const fertFin = sumarDias(diaOvulacion, 1);
+
+        const tarjeta = document.createElement('div');
+        
+        // Estilo idéntico a la foto: Fondo blanco, borde suave, esquinas redondeadas
+        tarjeta.style.background = "#ffffff";
+        tarjeta.style.border = "1px solid #f0e6ff";
+        tarjeta.style.borderRadius = "18px";
+        tarjeta.style.padding = "20px";
+        tarjeta.style.marginBottom = "15px";
+        tarjeta.style.boxShadow = "0 2px 8px rgba(0,0,0,0.02)";
+        tarjeta.style.textAlign = "left";
+
+        tarjeta.innerHTML = `
+          <div style="font-weight:bold; font-size:1.1rem; margin-bottom:12px; color:#333; text-transform:lowercase;">
+            ${inicioPeriodo.toLocaleString('es-ES', { month: 'long' })} de ${inicioPeriodo.getFullYear()}
+          </div>
+          
+          <div style="font-size:0.9rem; color:#444; line-height:1.8;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span>🩸</span> <strong>Periodo:</strong> ${mostrarFecha(inicioPeriodo)} — ${mostrarFecha(finPeriodo)}
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span>🌼</span> <strong>Ovulación:</strong> ${mostrarFecha(diaOvulacion)}
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span>💗</span> <strong>Fértil:</strong> ${mostrarFecha(fertInicio)} — ${mostrarFecha(fertFin)}
+            </div>
+          </div>
+        `;
+
+        contMeses.appendChild(tarjeta);
+        
+        // Saltamos al siguiente mes sumando la duración del ciclo
+        fechaCiclo.setMonth(fechaCiclo.getMonth() + 1);
+      }
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+            form.reset();
+            resultsMain.innerHTML = '';
+            monthsContainer.innerHTML = '';
+        });
+    }
+    }); // Cierre del addEventListener
+  } // Cierre del if (form)
+</script>
+</body>
+</html>
